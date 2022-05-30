@@ -1,8 +1,8 @@
 import axios,{Axios, Method} from 'axios'
 import md5 from 'js-md5'
-import {GetComicsByIdSchema, GetCharactersSchema, GetCharactersResponse, GetCharactersBtIdResponse, GetComicsByIdResponse} from './schema'
+import {GetComicsByIdSchema, GetCharactersSchema, GetCharactersResponse, GetCharactersBtIdResponse, GetComicsByIdResponse, GetDoRequestSchema} from './schema'
 
-const doRequest = async ({ method = 'GET', body, headers={}, params, path }: {method: Method, body?: any, headers?: {}, params?: any, path: string}) => {
+const doRequest = async ({ method = 'GET', body, headers, params, path }:GetDoRequestSchema) => {
   try {
     const timestamp = new Date().getTime();
     const hash = md5(timestamp + String(process.env.REACT_APP_PRIVATE_KEY) + String(process.env.REACT_APP_PUBLIC_KEY));
@@ -33,6 +33,7 @@ export const getCharacters = async (params?:GetCharactersSchema) => {
     path: '/characters',
     params: hasParams
   })
+  console.log(characters)
   return characters as GetCharactersResponse
 }
 

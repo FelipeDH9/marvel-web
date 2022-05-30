@@ -23,6 +23,14 @@ export type GetCharactersSchema = {
   offset?: number
 }
 
+export type GetDoRequestSchema = {
+  method: string, 
+  body?: any,
+  headers?: {}, 
+  params?: any, 
+  path: string
+}
+
 export type GetCharactersResponse = {
   code: number,
   status: string,
@@ -318,3 +326,4 @@ export type GetComicsByIdResponse = {
   },
   etag: string
 }
+

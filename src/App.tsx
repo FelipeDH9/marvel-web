@@ -1,8 +1,14 @@
 import React from 'react';
+import { useEffect, useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
+import { getCharacters } from '../src/services/marvel/index'
 
 function App() {
+  useEffect(()=>{
+    getCharacters()
+  },[])
+
   return (
     <div className="App">
       <header className="App-header">
