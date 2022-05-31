@@ -6,12 +6,13 @@ const doRequest = async ({ method = 'GET', body, headers, params, path }:GetDoRe
   try {
     const timestamp = new Date().getTime();
     const hash = md5(timestamp + String(process.env.REACT_APP_PRIVATE_KEY) + String(process.env.REACT_APP_PUBLIC_KEY));
+    console.log('hash', hash)
     const customParams = {
       hash,
       ts: timestamp,
       apikey: String(process.env.REACT_APP_PUBLIC_KEY),
     };
-
+    console.log('customParams', customParams)
     const {data}= await axios.request({
       method,
       params: {...params, customParams},

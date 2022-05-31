@@ -1,0 +1,23 @@
+/* HEADER */
+header{
+  background-color: red;
+}
+
+header .header{
+  display: flex;
+}
+
+header .header h1{
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* CONTENT */
+.content{
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}

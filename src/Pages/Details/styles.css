@@ -1,10 +1,3 @@
-/* .container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 1500px;
-  padding: 0 1rem;
-} */
 
 /* HEADER */
 header{
@@ -14,7 +7,10 @@ header{
 .header{
   display: flex;
   align-items: center;
-  margin: 0 1.5rem;
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: 0 1.5rem;
+
 }
 
 .header h2{
@@ -45,6 +41,15 @@ header{
 
 
 @media (min-width: 992px){
+  .main{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 0 1.5rem;
+    align-items: center;
+  }
+
   .image-desc{
     border-bottom:none;
   }

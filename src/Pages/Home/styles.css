@@ -1,0 +1,49 @@
+:root{
+  --padding-width: 1.5rem
+}
+
+/* HEADER */
+header{
+  background-color: red;
+}
+
+header .header{
+  display: flex;
+}
+
+header .header h1{
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: var(--padding-width);
+}
+
+.hero-info{
+  display: flex;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #404040;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.hero-info img{
+  width: 4rem;
+  height: auto;
+  margin-right: 1rem;
+  border-radius: 5px;
+}
+
+@media (max-width: 767px){
+  :root{
+    --padding-width: 1rem
+  }
+}

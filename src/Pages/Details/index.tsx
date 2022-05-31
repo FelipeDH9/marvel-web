@@ -1,4 +1,6 @@
 import './styles.css'
+import { useEffect, useState } from 'react'
+import { getCharacters } from '../../services/marvel'
 
 export function Details(){
   return(
@@ -6,7 +8,7 @@ export function Details(){
 
       <header>
         <div className='header'>
-          <a href="#">Voltar</a>
+          <a href="/">Voltar</a>
           <h2>NOME DO HEROI</h2>
         </div>
       </header>
