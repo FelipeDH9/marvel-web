@@ -1,6 +1,6 @@
 import React from 'react';
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Home } from './Pages/Home'
 import { Details } from './Pages/Details';
@@ -20,7 +20,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/details" element={<Details />}/>
+      <Route path="/details/:id" element={<Details />}/>
       <Route path="*" element={<NotFound />}/>
     </Routes>
   </BrowserRouter>

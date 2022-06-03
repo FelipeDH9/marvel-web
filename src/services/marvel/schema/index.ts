@@ -1,3 +1,11 @@
+export type GetDoRequestSchema = {
+  method: string, 
+  body?: any,
+  headers?: {}, 
+  params?: any, 
+  path: string
+}
+
 export type GetComicsByIdSchema = {
   format?: string; 
   formatType?: string; 
@@ -21,14 +29,6 @@ export type GetCharactersSchema = {
   orderBy?: string, 
   limit?: number, 
   offset?: number
-}
-
-export type GetDoRequestSchema = {
-  method: string, 
-  body?: any,
-  headers?: {}, 
-  params?: any, 
-  path: string
 }
 
 export type GetCharactersResponse = {
@@ -110,7 +110,7 @@ export type GetCharactersResponse = {
   etag: string
 }
 
-export type GetCharactersBtIdResponse = {
+export type GetCharactersByIdResponse = {
   code: number,
   status: string,
   copyright: string,
@@ -326,4 +326,68 @@ export type GetComicsByIdResponse = {
   },
   etag: string
 }
+
+export type GetHeroesResponseSchema = {
+  id: number,
+  name: string,
+  description: string,
+  modified: Date,
+  resourceURI: string,
+    urls: [
+      {
+        type: string,
+        url: string
+      }
+    ],
+    thumbnail: {
+      path: string,
+      extension: string
+    },
+    comics: {
+      available: number,
+      returned: number,
+      collectionURI: string,
+      items: [
+        {
+          resourceURI: string,
+          name: string
+        }
+      ]
+    },
+    stories: {
+      available: number,
+      returned: number,
+      collectionURI: string,
+      items: [
+        {
+          resourceURI: string,
+          name: string,
+          type: string
+        }
+      ]
+    },
+    events: {
+      available: number,
+      returned: number,
+      collectionURI: string,
+      items: [
+        {
+          resourceURI: string,
+          name: string
+        }
+      ]
+    },
+    series: {
+      available: number,
+      returned: number,
+      collectionURI: string,
+      items: [
+        {
+          resourceURI: string,
+          name: string
+        }
+      ]
+    }
+}
+  
 

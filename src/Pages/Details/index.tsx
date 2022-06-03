@@ -1,8 +1,24 @@
 import './styles.css'
 import { useEffect, useState } from 'react'
-import { getCharacters } from '../../services/marvel'
+import { useParams } from 'react-router-dom'
+import { GetCharactersByIdResponse } from '../../services/marvel/schema'
+import { getCharactersById } from "../../services/marvel/index"
 
 export function Details(){
+  // const { id } = useParams()
+  const {teste}  = useParams();
+  // const teste:number = useParams()
+  const [currentCharacter, setCurrentCharacter] = useState({})
+  const [characterById, setCharacterByI] = useState<GetCharactersByIdResponse[]>([])
+
+  async function getCharacter(){
+    String(teste)
+    // const res = await getCharactersById(teste)
+  }
+  useEffect(() => {
+
+  }, [])
+
   return(
     <div className='container'>
 

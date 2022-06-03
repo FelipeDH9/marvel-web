@@ -1,11 +1,26 @@
 import './styles.css'
 import { useEffect, useState } from 'react'
 import { getCharacters } from '../../services/marvel'
+import { GetHeroesResponseSchema, GetCharactersResponse } from '../../services/marvel/schema'
 
 export function Home(){
+  const [heroes, setHeroes] = useState<GetHeroesResponseSchema[]>([])
+  // const [teste, setTeste] = useState<GetCharactersResponse[]>([])
+  const [characterName, SetCharacterName] = useState<string>("")
+
+  async function fetchData(){
+    
+    const response = await getCharacters()
+    if(response){
+      const characters = response.data.results
+      // setTeste(response as GetCharactersResponse)
+      setHeroes(characters)
+      console.log('heroes', characters)
+    }
+  }
 
   useEffect(() => {
-    getCharacters()
+    fetchData()
   }, [])
 
   return (
@@ -15,98 +30,24 @@ export function Home(){
           <h1>Marvel Heroes</h1>
         </div>
       </header>
-
+      <div className='nav'>
+        <input type="text" placeholder='personagem' onChange={value=> SetCharacterName(value.target.value)}></input>
+        {/* <button onClick={}></button> */}
+        <p>{characterName}</p>
+      </div>
       <div className='main-content'>
-          {/* FAZER UM MAP NA RESPOSTA DA API PARA PEGAR TODOS OS PERSONAGENS, E CRIAR UM a PARA CADA UM DELES */}
-  
-            <a href="/details" className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
+      {/* <button onClick={TESTE}></button> */}
 
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
+          {heroes?.map(hero =>(
+            <a href={`/details/${hero.id}`} className='hero-info' key={hero.id}>
+              <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={hero.name} />
               <div className='hero-name'>
-                <p>NOME DO HEROI</p>
+                <p>{hero.name}</p>
                 <p>Veja mais detalhes</p>           
               </div>
             </a>
+          ))}
 
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a><a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a><a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a><a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a><a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-
-            <a href="/details"  className='hero-info'>
-              <img src="https://via.placeholder.com/40x40" alt="Hero" />
-              <div className='hero-name'>
-                <p>NOME DO HEROI</p>
-                <p>Veja mais detalhes</p>           
-              </div>
-            </a>
-             
       </div>
       
     </div>
