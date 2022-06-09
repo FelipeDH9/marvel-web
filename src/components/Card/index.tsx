@@ -1,11 +1,15 @@
-export function Card(){
+type PropsSchema ={
+  name: string
+}
+
+export function Card(props:PropsSchema){
   return(
     <div className="container">
-      <a href="">
+      <a href="#">
         <img src="#" alt="hero's image" />
         <div className="name-seemore">
-          <h3>Hero's name</h3>
-          <p>See more</p>
+          <h3>{props.name}</h3>
+          <p>Veja mais detalhes</p>
         </div>
       </a>
     </div>

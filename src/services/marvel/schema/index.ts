@@ -110,7 +110,7 @@ export type GetCharactersResponse = {
   etag: string
 }
 
-export type GetCharactersByIdResponse = {
+export type GetCharacterByIdResponse = {
   code: number,
   status: string,
   copyright: string,
@@ -327,7 +327,7 @@ export type GetComicsByIdResponse = {
   etag: string
 }
 
-export type GetHeroesResponseSchema = {
+export type GetCharactersResponseSchema = {
   id: number,
   name: string,
   description: string,

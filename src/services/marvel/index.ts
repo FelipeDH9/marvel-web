@@ -1,6 +1,6 @@
 import axios,{Axios, Method} from 'axios'
 import md5 from 'js-md5'
-import {GetComicsByIdSchema, GetCharactersSchema, GetCharactersResponse, GetCharactersByIdResponse, GetComicsByIdResponse, GetDoRequestSchema} from './schema'
+import {GetComicsByIdSchema, GetCharactersSchema, GetCharactersResponse, GetCharacterByIdResponse, GetComicsByIdResponse, GetDoRequestSchema} from './schema'
 
 const doRequest = async ({ method = 'GET', body, headers, params, path }:GetDoRequestSchema) => {
   try {
@@ -36,7 +36,7 @@ const doRequest = async ({ method = 'GET', body, headers, params, path }:GetDoRe
     return error
   }
 }
-
+// pegar todos os personagens
 export const getCharacters = async (params?:GetCharactersSchema) => {
   const hasParams = params ? { ...params } : {}
   const characters = await doRequest({
@@ -47,14 +47,16 @@ export const getCharacters = async (params?:GetCharactersSchema) => {
   return characters as GetCharactersResponse
 }
 
-export const getCharactersById = async (characterId: number) =>{
+// pegar o personagem pelo seu id, sempre 1 personagem
+export const getCharacterById = async (characterId: number) =>{
   const character = await doRequest({
     method: 'GET',
     path: `/characters/${characterId}`
   })
-  return character as GetCharactersByIdResponse
+  return character as GetCharacterByIdResponse
 }
 
+// pegar os quadrinhos que tal personagem participou, sempre 1 personagem
 export const getComicsById = async ({characterId, params}:{characterId: number, params?: GetComicsByIdSchema}) =>{
   const hasParams = params ? { ...params } : {}
   const comics = await doRequest({

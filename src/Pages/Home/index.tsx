@@ -1,22 +1,31 @@
 import './styles.css'
 import { useEffect, useState } from 'react'
 import { getCharacters } from '../../services/marvel'
-import { GetHeroesResponseSchema, GetCharactersResponse } from '../../services/marvel/schema'
+import { GetCharactersResponseSchema, GetCharactersResponse } from '../../services/marvel/schema'
+import ReactPaginate from 'react-paginate';
 
 export function Home(){
-  const [heroes, setHeroes] = useState<GetHeroesResponseSchema[]>([])
-  // const [teste, setTeste] = useState<GetCharactersResponse[]>([])
+  const [heroes, setHeroes] = useState<GetCharactersResponseSchema[]>([])
   const [characterName, SetCharacterName] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const [pageCount, setPageCount] = useState<number>(0)
+  const pageSize = 30
 
-  async function fetchData(){
+  async function fetchData(currentOffset = 0){
     
-    const response = await getCharacters()
+    const response = await getCharacters({orderBy: "name", limit: pageSize, offset: currentOffset})
     if(response){
       const characters = response.data.results
-      // setTeste(response as GetCharactersResponse)
+      console.log(response)
       setHeroes(characters)
+      setPageCount(Math.ceil( response.data.total / pageSize))
       console.log('heroes', characters)
     }
+  }
+
+  const handlePageClick = async (offset:number) => {
+    
+    await fetchData(pageSize * offset)
   }
 
   useEffect(() => {
@@ -31,7 +40,7 @@ export function Home(){
         </div>
       </header>
       <div className='nav'>
-        <input type="text" placeholder='personagem' onChange={value=> SetCharacterName(value.target.value)}></input>
+        <input type="text" placeholder='Nome' onChange={value=> SetCharacterName(value.target.value)}></input>
         {/* <button onClick={}></button> */}
         <p>{characterName}</p>
       </div>
@@ -49,7 +58,21 @@ export function Home(){
           ))}
 
       </div>
-      
+      <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={(event)=>handlePageClick(Number(event.selected))}
+          pageRangeDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="<"
+          renderOnZeroPageCount={undefined}
+          containerClassName="pagination"
+          pageLinkClassName="page-num"
+          previousLinkClassName="page-num"
+          nextLinkClassName="page-num"
+          activeLinkClassName="active"
+        />
+
     </div>
   )
 }

@@ -1,10 +1,11 @@
 :root{
-  --padding-width: 1.5rem
+  --padding-width: 1.5rem;
+  --primary-color: #ec1d24
 }
 
 /* HEADER */
 header{
-  background-color: red;
+  background-color: var(--primary-color);
 }
 
 header .header{
@@ -42,6 +43,45 @@ header .header h1{
   border-radius: 5px;
 }
 
+
+/* PAGINATION */
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 5px;
+  color: black;
+}
+
+.pagination .page-num {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+.pagination .page-num:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.active{
+  background-color: var(--primary-color) ;
+  color: #fff;
+}
+
+
+@media (max-width: 767px){
+  .pagination .page-num {
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: smaller;
+  }
+}
 @media (max-width: 767px){
   :root{
     --padding-width: 1rem
