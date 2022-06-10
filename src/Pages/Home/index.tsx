@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import { getCharacters } from '../../services/marvel'
 import { GetCharactersResponseSchema, GetCharactersResponse } from '../../services/marvel/schema'
 import ReactPaginate from 'react-paginate';
+import {ToTopButton} from '../../components/ToTopButton'
 
 export function Home(){
   const [heroes, setHeroes] = useState<GetCharactersResponseSchema[]>([])
-  const [characterName, SetCharacterName] = useState<string>("")
+  const [characterName, setCharacterName] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
   const [pageCount, setPageCount] = useState<number>(0)
+  const [changed, setChanged] = useState<number>(0)
   const pageSize = 30
 
   async function fetchData(currentOffset = 0){
@@ -23,8 +25,18 @@ export function Home(){
     }
   }
 
+  async function getCharactersByName(){
+    const response = await getCharacters({orderBy: "name", limit: pageSize, name: characterName})
+    if(response){
+      const characters = response.data.results
+      console.log(response)
+      setHeroes(characters)
+      setPageCount(Math.ceil( response.data.total / pageSize))
+      console.log('heroes', characters)
+    }
+  }
+
   const handlePageClick = async (offset:number) => {
-    
     await fetchData(pageSize * offset)
   }
 
@@ -40,9 +52,12 @@ export function Home(){
         </div>
       </header>
       <div className='nav'>
-        <input type="text" placeholder='Nome' onChange={value=> SetCharacterName(value.target.value)}></input>
-        {/* <button onClick={}></button> */}
-        <p>{characterName}</p>
+        <input type="text" placeholder="Character's Name" onChange={value=> setCharacterName(value.target.value)}></input>
+        <div className='buttons-nav'>
+          <button className="button" onClick={()=>getCharactersByName()}>Search</button>
+          <button className="button" onClick={()=>fetchData()}>Reset</button>
+
+        </div>
       </div>
       <div className='main-content'>
       {/* <button onClick={TESTE}></button> */}
@@ -72,6 +87,8 @@ export function Home(){
           nextLinkClassName="page-num"
           activeLinkClassName="active"
         />
+
+        <ToTopButton/>
 
     </div>
   )

@@ -43,6 +43,46 @@ header .header h1{
   border-radius: 5px;
 }
 
+/* NAV */
+.nav {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: var(--padding-width);
+  
+}
+
+.nav input {
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  font-size: .9375rem;
+  line-height: 1.5;
+  /* width: 100%; */
+
+  border-radius: 0.25rem;
+  border: 1px solid var(--primary-color);
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.buttons-nav{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.button {
+  background-color: var(--primary-color);
+  height: 2rem;
+  width: 5rem;
+  
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  margin-top: .6rem;
+
+  cursor: pointer;
+}
 
 /* PAGINATION */
 .pagination{
@@ -50,9 +90,9 @@ header .header h1{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
   gap: 5px;
   color: black;
+  padding-bottom: 2rem;
 }
 
 .pagination .page-num {
@@ -74,20 +114,19 @@ header .header h1{
 
 
 @media (max-width: 767px){
-  .pagination .page-num {
-    padding: 4px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-weight: 400;
-    font-size: smaller;
-  }
-}
-@media (max-width: 767px){
   :root{
     --padding-width: 1rem
   }
 
   .hero-info img{
     width: 6rem;
+  }
+
+  .pagination .page-num {
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: smaller;
   }
 }

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GetCharacterByIdResponse, GetCharactersResponseSchema } from '../../services/marvel/schema'
 import { getCharacterById } from "../../services/marvel/index"
-import { url } from 'inspector'
 
 
 
@@ -13,7 +12,6 @@ export function Details(){
 
   async function getCharacter(){
     const res = await getCharacterById(Number(characterId))
-    console.log('res =>', res)
     const characterById = res.data.results
     console.log('characterById', characterById[0])
     setCurrentCharacter(characterById)
@@ -43,14 +41,14 @@ export function Details(){
             </>
           )}
           {currentCharacter[0]?.urls.map(url => (
-            url.type === "wiki" && <a href={url.url} target="_blank">All details about {currentCharacter[0]?.name}</a>
+            url.type === "wiki" && <a href={url.url} target="_blank" key={url.url}>Everything about {currentCharacter[0]?.name}</a>
           ))}
         </div>
         
         <div className='comics'>
           <h2>Comics</h2>
           {currentCharacter[0]?.comics.items.map(comic => (
-            <li>{comic.name}</li>
+            <li key={comic.name}>{comic.name}</li>
           ))}
         </div>
       </div>
